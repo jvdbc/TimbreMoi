@@ -1,0 +1,54 @@
+﻿<Window x:Class="TimbreMoi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimbreMoi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" Loaded="OnLoaded">
+    
+    <Window.Resources>
+        <DataTemplate x:Key="UserDataTemplate">
+            <local:ValeurNombreUc Value="{Binding}" Margin="0,0,10,0" />
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <GroupBox Grid.Row="0" Header="Timbres">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Ajouter de timbres</Label>
+                    <Button>+</Button>
+                </StackPanel>
+
+                <ItemsControl Grid.Row="1" x:Name="ValeurNombreList" ItemTemplate="{StaticResource UserDataTemplate}" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
+            
+        </GroupBox>
+        
+        <TextBox Grid.Row="1" x:Name="TxtAffranchissement" TextChanged="OnTextChanged" />
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Height="20" Text="Truc" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
