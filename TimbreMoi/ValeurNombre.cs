@@ -21,10 +21,10 @@ namespace TimbreMoi
 
         private uint _nombre;
 
-        public ValeurNombre(double valeur)
+        public ValeurNombre(double valeur, uint nombre)
         {
             Valeur = valeur;
-            _nombre = 0;
+            _nombre = nombre;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

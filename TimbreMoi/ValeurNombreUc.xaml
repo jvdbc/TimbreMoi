@@ -5,14 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimbreMoi"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="100" d:DesignWidth="78">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid MinWidth="78" MinHeight="100">
+             <Grid.Background>
+                <ImageBrush ImageSource="{Binding ImageSource, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+             </Grid.Background>
 
-        <TextBlock Grid.Row="0" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Valeur}"/>
-        <TextBlock Grid.Row="1" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Nombre}" />
+            <TextBlock Grid.Row="0" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Valeur, StringFormat={}{0:#,0.00 €}}"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Foreground="DarkBlue" FontWeight="Heavy" />
+        </Grid>
+
+        <Grid Grid.Column="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label>*</Label>
+            <TextBlock Grid.Column="1" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Nombre}" />
+        </Grid>
+
     </Grid>
 </UserControl>

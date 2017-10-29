@@ -5,50 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimbreMoi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="OnLoaded">
+        Title="MainWindow" MinHeight="350" MinWidth="525" Loaded="OnLoaded">
     
     <Window.Resources>
-        <DataTemplate x:Key="UserDataTemplate">
-            <local:ValeurNombreUc Value="{Binding}" Margin="0,0,10,0" />
+        <BitmapImage x:Key="srcTimbre" UriSource="timbre.jpg"/>
+        <DataTemplate x:Key="DTValeurNombre">
+            <local:ValeurNombreUc Value="{Binding}" Margin="0,0,10,0" ImageSource="{StaticResource srcTimbre}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="DTTimbre">
+            <Grid MinWidth="78" MinHeight="100" Margin="5,0,5,0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="{StaticResource srcTimbre}"/>
+                </Grid.Background>
+                <TextBlock Text="{Binding Path=., Mode=Default, StringFormat={}{0:#,0.00 €}}" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           Foreground="DarkBlue" 
+                           FontWeight="Heavy" />
+            </Grid>
         </DataTemplate>
     </Window.Resources>
     
     <Grid>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="1" Header="Timbres à disposition" Margin="10" >
+            <ItemsControl x:Name="ICValeurPossible" ItemTemplate="{StaticResource DTTimbre}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </GroupBox>
         
-        <GroupBox Grid.Row="0" Header="Timbres">
+        <GroupBox Grid.Row="0" Header="Ajouter une valeur" Margin="10" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Label>Ajouter de timbres</Label>
-                    <Button>+</Button>
-                </StackPanel>
 
-                <ItemsControl Grid.Row="1" x:Name="ValeurNombreList" ItemTemplate="{StaticResource UserDataTemplate}" >
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" x:Name="TxtNewValue" Margin="10"/>
+                    <Button Grid.Column="1" Click="Button_Click" Margin="10">+</Button>
+                    <Image Grid.Column="2" Source="{StaticResource srcTimbre}" Width="78" Height="100" Margin="10" />
+                </Grid>
             </Grid>
-            
         </GroupBox>
-        
-        <TextBox Grid.Row="1" x:Name="TxtAffranchissement" TextChanged="OnTextChanged" />
-        
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Height="20" Text="Truc" HorizontalAlignment="Stretch"/>
-        </StackPanel>
-        
+
+        <GroupBox Grid.Row="2" Header="Saisir l'affranchissement" Margin="10" >
+            <TextBox x:Name="TxtAffranchissement" TextChanged="OnTextChanged" />
+        </GroupBox>
+
+        <GroupBox Grid.Row="3" Header="Liste des timbres nécessaires:" Margin="10" >
+            <ItemsControl x:Name="ICValeurNombre" ItemTemplate="{StaticResource DTValeurNombre}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </GroupBox>
+  
     </Grid>
 </Window>

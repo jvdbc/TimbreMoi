@@ -33,7 +33,17 @@ namespace TimbreMoi
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(ValeurNombre), typeof(ValeurNombreUc), new PropertyMetadata(new ValeurNombre(0.0)));
+            DependencyProperty.Register("Value", typeof(ValeurNombre), typeof(ValeurNombreUc), new PropertyMetadata(new ValeurNombre(0.0, 0)));
+
+        public ImageSource ImageSource
+        {
+            get { return (ImageSource)GetValue(ImageSourceProperty); }
+            set { SetValue(ImageSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ImageSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImageSourceProperty =
+            DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(ValeurNombreUc), new PropertyMetadata(null));
 
     }
 }

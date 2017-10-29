@@ -4,6 +4,39 @@
              xmlns:local="clr-namespace:TimbreMoi"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+            </ResourceDictionary.MergedDictionaries>
+            
+            <FontFamily x:Key="StandardFontFamily">/TimbreMoi;component/Fonts/#OpenSans</FontFamily>
+            
+            <Style TargetType="Button" >
+                <Setter Property="FontFamily" Value="{DynamicResource StandardFontFamily}" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            
+            <Style TargetType="Label" >
+                <Setter Property="FontFamily" Value="{DynamicResource StandardFontFamily}" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <Style TargetType="TextBlock" >
+                <Setter Property="FontFamily" Value="{DynamicResource StandardFontFamily}" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <Style TargetType="TextBox" >
+                <Setter Property="FontFamily" Value="{DynamicResource StandardFontFamily}" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <Style TargetType="GroupBox" >
+                <Setter Property="FontFamily" Value="{DynamicResource StandardFontFamily}" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <Style TargetType="{x:Type Window}"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
