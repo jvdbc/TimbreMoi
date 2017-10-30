@@ -18,17 +18,22 @@
              </Grid.Background>
 
             <TextBlock Grid.Row="0" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Valeur, StringFormat={}{0:#,0.00 €}}"
-                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Foreground="DarkBlue" FontWeight="Heavy" />
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Foreground="DarkBlue" 
+                       FontWeight="DemiBold" />
         </Grid>
 
         <Grid Grid.Column="1" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Label>*</Label>
-            <TextBlock Grid.Column="1" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Nombre}" />
+            <Label FontWeight="DemiBold">X</Label>
+            <TextBlock Grid.Column="1" 
+                       Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Value.Nombre}"
+                       FontWeight="DemiBold"
+                       />
         </Grid>
 
     </Grid>

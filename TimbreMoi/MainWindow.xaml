@@ -5,24 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimbreMoi"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="350" MinWidth="525" Loaded="OnLoaded">
+        Title="Timbre Moi !" MinHeight="350" MinWidth="525" 
+        Loaded="OnLoaded" 
+        Icon="timbre.jpg">
     
     <Window.Resources>
-        <BitmapImage x:Key="srcTimbre" UriSource="timbre.jpg"/>
-        <DataTemplate x:Key="DTValeurNombre">
-            <local:ValeurNombreUc Value="{Binding}" Margin="0,0,10,0" ImageSource="{StaticResource srcTimbre}" />
+        <BitmapImage x:Key="SrcTimbre" UriSource="timbre.jpg"/>
+        
+        <DataTemplate x:Key="DtValeurNombre">
+            <local:ValeurNombreUc Value="{Binding}" Margin="0,0,10,0" ImageSource="{StaticResource SrcTimbre}" />
         </DataTemplate>
 
-        <DataTemplate x:Key="DTTimbre">
+
+        <DataTemplate x:Key="DtValeurNombre2">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Row="0" Grid.ColumnSpan="3" Source="{StaticResource SrcTimbre}" 
+                       Width="78" Height="100"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=Valeur, StringFormat={}{0:#,0.00€}}"
+                       Foreground="DarkBlue" 
+                       FontWeight="DemiBold" />
+
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                       FontWeight="DemiBold" Margin="5,0">x</TextBlock>
+                <TextBlock 
+                       Grid.Row="1" Grid.Column="2" 
+                       Text="{Binding Path=Nombre}"
+                       FontWeight="DemiBold"
+                       />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DtTimbre">
             <Grid MinWidth="78" MinHeight="100" Margin="5,0,5,0">
-                <Grid.Background>
-                    <ImageBrush ImageSource="{StaticResource srcTimbre}"/>
-                </Grid.Background>
-                <TextBlock Text="{Binding Path=., Mode=Default, StringFormat={}{0:#,0.00 €}}" 
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Image Source="{StaticResource SrcTimbre}" Width="78" Height="100"/>
+                
+                <TextBlock Grid.Row="1" Text="{Binding Path=., Mode=Default, StringFormat={}{0:#,0.00€}}" 
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center" 
                            Foreground="DarkBlue" 
-                           FontWeight="Heavy" />
+                           FontWeight="DemiBold" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -36,8 +75,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <GroupBox Grid.Row="1" Header="Timbres à disposition" Margin="10" >
-            <ItemsControl x:Name="ICValeurPossible" ItemTemplate="{StaticResource DTTimbre}" >
+        <GroupBox Grid.Row="1" Header="Timbres disponibles :" Margin="10" >
+            <ItemsControl x:Name="ICValeurPossible" ItemTemplate="{StaticResource DtTimbre}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Orientation="Horizontal"/>
@@ -46,7 +85,7 @@
             </ItemsControl>
         </GroupBox>
         
-        <GroupBox Grid.Row="0" Header="Ajouter une valeur" Margin="10" >
+        <GroupBox Grid.Row="0" Header="Ajouter une valeur :" Margin="10" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -58,19 +97,19 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" x:Name="TxtNewValue" Margin="10"/>
+                    <TextBox Grid.Column="0" x:Name="TxtNewValue" Margin="10" VerticalAlignment="Center"/>
                     <Button Grid.Column="1" Click="Button_Click" Margin="10">+</Button>
-                    <Image Grid.Column="2" Source="{StaticResource srcTimbre}" Width="78" Height="100" Margin="10" />
+                    <Image Grid.Column="2" Source="{StaticResource SrcTimbre}" Width="78" Height="100" Margin="10" />
                 </Grid>
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="2" Header="Saisir l'affranchissement" Margin="10" >
+        <GroupBox Grid.Row="2" Header="Saisir l'affranchissement :" Margin="10" >
             <TextBox x:Name="TxtAffranchissement" TextChanged="OnTextChanged" />
         </GroupBox>
 
-        <GroupBox Grid.Row="3" Header="Liste des timbres nécessaires:" Margin="10" >
-            <ItemsControl x:Name="ICValeurNombre" ItemTemplate="{StaticResource DTValeurNombre}" >
+        <GroupBox Grid.Row="3" Header="Timbres nécessaires :" Margin="10" >
+            <ItemsControl x:Name="ICValeurNombre" ItemTemplate="{StaticResource DtValeurNombre2}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Orientation="Horizontal"/>
