@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimbreMoi.Properties;
 
 namespace TimbreMoi
 {
@@ -31,18 +34,43 @@ namespace TimbreMoi
 
         private void Init()
         {
-            _valeurPossibles.Add(6.15);
-            _valeurPossibles.Add(5.10);
-            _valeurPossibles.Add(5.05);
-            _valeurPossibles.Add(4.45);
-            _valeurPossibles.Add(3.95);
-            _valeurPossibles.Add(1.25);
-            _valeurPossibles.Add(1.15);
-            _valeurPossibles.Add(0.85);
-            _valeurPossibles.Add(0.73);
-            _valeurPossibles.Add(0.1);
-            _valeurPossibles.Add(0.05);
-            _valeurPossibles.Add(0.01);
+            var configPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"TimbreMoi" ,"TimbreMoi.config");
+            if (!File.Exists(configPath))
+            {
+                
+            }
+
+            var values = Settings.Default.DefaultPossibleValues.Split(';');
+            foreach (var str in values)
+            {
+                double value;
+                if (double.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+                {
+                    _valeurPossibles.Add(value);
+                }
+                else if(double.TryParse(str, NumberStyles.Float, new CultureInfo("fr-FR"), out value))
+                {
+                    _valeurPossibles.Add(value);
+                }
+            }
+
+            if (_valeurPossibles.Count == 0)
+            {
+                _valeurPossibles.Add(6.15);
+                _valeurPossibles.Add(5.10);
+                _valeurPossibles.Add(5.05);
+                _valeurPossibles.Add(4.45);
+                _valeurPossibles.Add(3.95);
+                _valeurPossibles.Add(1.25);
+                _valeurPossibles.Add(1.15);
+                _valeurPossibles.Add(0.85);
+                _valeurPossibles.Add(0.73);
+                _valeurPossibles.Add(0.1);
+                _valeurPossibles.Add(0.05);
+                _valeurPossibles.Add(0.01);
+            }
+
+            _valeurPossibles = new ObservableCollection<double>(_valeurPossibles.OrderByDescending(v => v));
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -69,7 +97,7 @@ namespace TimbreMoi
         {
             var maxV = (from t in _valeurPossibles where t <= value orderby t descending select t).FirstOrDefault();
 
-            if (maxV == 0.0)
+            if (Math.Abs(maxV) <= 0.0)
             {
                 return;
             }

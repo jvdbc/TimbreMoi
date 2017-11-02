@@ -25,13 +25,13 @@ namespace TimbreMoi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("truc")]
-        public string Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("6.15;5.10;5.05;4.45;3.95;1.25;1.15;0.85;0.73;0.1;0.05;0.01")]
+        public string DefaultPossibleValues {
             get {
-                return ((string)(this["Setting"]));
+                return ((string)(this["DefaultPossibleValues"]));
             }
             set {
-                this["Setting"] = value;
+                this["DefaultPossibleValues"] = value;
             }
         }
     }

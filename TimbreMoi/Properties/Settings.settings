@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TimbreMoi.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)">truc</Value>
+    <Setting Name="DefaultPossibleValues" Type="System.String" Scope="User">
+      <Value Profile="(Default)">6.15;5.10;5.05;4.45;3.95;1.25;1.15;0.85;0.73;0.1;0.05;0.01</Value>
     </Setting>
   </Settings>
 </SettingsFile>
